@@ -71,10 +71,19 @@ The peripheral clock speed varies based on PMU configuration. These observations
 |----------------------------|------------------------|---------------------|-------|
 | `0b00000000 00000000 00000000 00000000` | `0b11111111 11111111 11111111 11111111` | **12 MHz** | Full speed, no throttling |
 | `0b10000000 00000100 00000100 00000000` | `0b11111111 11111111 11111111 11111111` | **12 MHz** | Still full speed despite wakeup bits |
+| `0b00000000 00000100 00000100 00000000` | `0b11111111 11111111 11111111 11111111` | **12 MHz** | Still full speed despite wakeup bits |
 | Unknown | Some bits = 0 | **46.6 kHz** | Moderate throttling |
 | Unknown | Unknown | **32.79 kHz** | Heavy throttling (~12MHz/366) |
 
 ### Timer Calculations
+
+Effective timer tick rate after applying the prescaler.
+
+**Formula:** `timer_tick_rate = peripheral_clock / prescaler`
+
+Converts tick rate into the number of timer ticks that occur during one 60 Hz frame interval.
+
+**Formula:** `ticks = timer_tick_rate / 60`
 
 With a prescaler of 256 (`PRESCALE_DIV256`), the timer tick rates are:
 
@@ -84,7 +93,21 @@ With a prescaler of 256 (`PRESCALE_DIV256`), the timer tick rates are:
 | **46.6 kHz** | 182 Hz | 3 | 5.33s (320px @ 60fps) |
 | **32.79 kHz** | 128 Hz | 2 | 5.33s (320px @ 60fps) |
 
-**Formula:** `timer_tick_rate = peripheral_clock / prescaler / target_fps`
+With a prescaler of 16 (`PRESCALE_DIV16`), the timer tick rates are:
+
+| Peripheral Clock | Timer Tick Rate | Ticks for 60 Hz | Expected Frame Time |
+|------------------|-----------------|-----------------|---------------------|
+| **12 MHz** | 750 kHz | 12500 | 5.33s (320px @ 60fps) |
+| **46.6 kHz** | 2,913 Hz | 49 | 5.33s (320px @ 60fps) |
+| **32.79 kHz** | 2,049 Hz | 34 | 5.33s (320px @ 60fps) |
+
+With a prescaler of 1 (`PRESCALE_DIV1`), the timer tick rates are:
+
+| Peripheral Clock | Timer Tick Rate | Ticks for 60 Hz | Expected Frame Time |
+|------------------|-----------------|-----------------|---------------------|
+| **12 MHz** | 12 MHz | 200,000 | 5.33s (320px @ 60fps) |
+| **46.6 kHz** | 46.6 kHz | 777 | 5.33s (320px @ 60fps) |
+| **32.79 kHz** | 32.79 kHz | 547 | 5.33s (320px @ 60fps) |
 
 ## Test Programs
 
