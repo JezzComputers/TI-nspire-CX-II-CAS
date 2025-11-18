@@ -72,7 +72,7 @@ The peripheral clock speed varies based on PMU configuration. These observations
 | `0b00000000 00000000 00000000 00000000` | `0b11111111 11111111 11111111 11111111` | **12 MHz** | Full speed, no throttling |
 | `0b10000000 00000100 00000100 00000000` | `0b11111111 11111111 11111111 11111111` | **12 MHz** | Still full speed despite wakeup bits |
 | `0b00000000 00000100 00000100 00000000` | `0b11111111 11111111 11111111 11111111` | **12 MHz** | Still full speed despite wakeup bits |
-| Unknown | Some bits = 0 | **46.6 kHz** | Moderate throttling |
+| Unknown | Unknown | **46.6 kHz** | Moderate throttling |
 | Unknown | Unknown | **32.79 kHz** | Heavy throttling (~12MHz/366) |
 
 ### Timer Calculations
