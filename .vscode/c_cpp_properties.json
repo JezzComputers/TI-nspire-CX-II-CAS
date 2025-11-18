@@ -1,0 +1,18 @@
+{
+  "configurations": [
+    {
+      "name": "NspireTests",
+      "compilerPath": "nspire-gcc",
+      "includePath": [
+        "${workspaceFolder}",
+        "/home/jeremy/Ndless/ndless-sdk/include",
+        "/home/jeremy/Ndless/ndless-sdk/include/nspireio"
+      ],
+      "defines": [],
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "linux-gcc-x64"
+    }
+  ],
+  "version": 4
+}
